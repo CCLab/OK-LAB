@@ -123,6 +123,9 @@ STATIC_URL = '/static/'
 
 STATIC_ROOT = os.path.join(BASE_DIR, 'static')
 
+STATIC_SITES = {template.split('.html')[0]: os.path.join('static_sites', template)
+                for template in os.listdir(os.path.join(BASE_DIR, 'base', 'templates', 'static_sites'))}
+
 try:
     from local_settings import *
 except:

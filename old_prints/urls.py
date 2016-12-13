@@ -20,6 +20,6 @@ from django.contrib import admin
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
     url(r'^', include('base.urls')),
-    url(r'^prints/', include('prints.urls')),
+    url(r'^prints/', include('prints.urls', namespace='prints')),
 
 ]
