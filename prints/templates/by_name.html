@@ -3,6 +3,11 @@
 
 {% block extra %}
 <div class="row">
-
+    <div class="col index-letters">
+        {% for letter in letters %}
+            <a href="{% url "prints:by_name" letter %}" class="gold-text index-letter">{{ letter }}</a>
+            <span class="print-info index-letter">  /  </span>
+        {% endfor %}
+    </div>
 </div>
 {% endblock %}

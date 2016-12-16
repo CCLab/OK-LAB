@@ -231,6 +231,16 @@ p { line-height: 1.9; }
 
 .form-control:focus { border-color: #906030; }
 
+.index-letter {
+    font-size: 1.65rem;
+}
+
+.index-letters {
+    padding-bottom: 35px;
+    padding-left: 20px;
+    padding-right: 20px;
+}
+
 .search-form-control {
 
 }
@@ -304,10 +314,6 @@ p { line-height: 1.9; }
 	.content-box { margin-bottom: 50px; }
 	.text-link { line-height: 2.4; }
 
-	.section {
-	    padding-top: 50px;
-	    padding-bottom: 60px;
-	}
 
 	.t-2-col-left, .t-2-col-right {
 		margin: 0 auto;
@@ -430,12 +436,22 @@ p { line-height: 1.9; }
 	}
 
 	.contact-row-related-posts {	margin-top: 40px; }
+
+	.section {
+		padding-top: 0;
+		padding-bottom: 0;
+	}
 }
 
 @media (max-width: 543px) {
 	.footer-links-container { padding-left: 0; }
 	.xs-m-t { margin-top: 20px; }
 	.gold-btn { padding: 10px 30px; }
+
+	.section {
+		padding-top: 0;
+		padding-bottom: 0;
+	}
 }
 
 @media(max-width: 510px) {
@@ -446,8 +462,8 @@ p { line-height: 1.9; }
 	}
 		
 	.section {
-		padding-top: 10%;
-		padding-bottom: 10%;
+		padding-top: 0;
+		padding-bottom: 0;
 	}
 
 	.subtitle { margin-bottom: 20px; }

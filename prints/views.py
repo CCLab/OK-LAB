@@ -1,4 +1,8 @@
+import random
+
 from django.shortcuts import render
+
+LETTERS = [chr(i) for i in range(65, 91)]
 
 
 def search(request):
@@ -12,7 +16,9 @@ def collection(request):
 
 def by_name(request, letter=None):
     paths = ["/img/data/Acta et literae_{}.jpg".format(i) for i in range(7)]
-    return render(request, "by_name.html", {'paths': paths})
+    if letter:
+        paths = [path for path in paths if random.choice([True, False])]
+    return render(request, "by_name.html", {'paths': paths, 'letters': LETTERS})
 
 
 def add(request):
