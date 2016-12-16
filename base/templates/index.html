@@ -3,15 +3,19 @@
 
 
 {% block content %}
-<div class="row">
-    <form action="index.html" method="post" class="default-form">
-        <div class="col-lg-10 form-group">
-            <input type="text" id="search" name="search" class="form-control" placeholder="Szukaj"/>
-        </div>
-        <div class="col-lg-2">
-            <button type="submit" class="gold-btn">Szukaj</button>
-        </div>
-    </form>
+<div class="row search-section">
+    <div class="col-lg-2"></div>
+    <div class="col-lg-8">
+        <form action="/" method="post" class="default-form">
+            <div class="input-group">
+                <input type="text" id="search" name="search" class="form-control search-form-control" placeholder="Szukaj"/>
+                <span class="input-group-btn">
+                    <button type="submit" class="btn gold-btn">Szukaj</button>
+                </span>
+            </div>
+        </form>
+    </div>
+    <div class="col-lg-2"></div>
 </div>
 
 {% endblock %}

@@ -235,6 +235,14 @@ p { line-height: 1.9; }
 
 .form-control:focus { border-color: #CC9900; }
 
+.search-form-control {
+
+}
+
+.input-group-btn {
+    padding-left: 15px;
+}
+
 .form-description { margin-top: 30px; }
 .default-form { padding-top: 20px; }
 
@@ -337,7 +345,7 @@ p { line-height: 1.9; }
 	#goldNavbar .navbar-nav .nav-link { padding: 10px 35px; }
 	#goldNavbar {
 		background: white; 
-		border-radius: 6px;
+		border-radius: 0px;
 	}
 	#goldNavbar .navbar-nav .nav-item+.nav-item { margin-left: 0; }
 	.navbar-toggler {
@@ -432,5 +440,9 @@ p { line-height: 1.9; }
 		margin-left: auto;
 		margin-right: auto;
 	}
+}
+
+.search-section {
+    padding-top: 10%;
 }
 
