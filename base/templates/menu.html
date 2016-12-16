@@ -6,17 +6,17 @@
             <!-- navbar -->
             <nav class="navbar main-nav">
 
-                <button class="navbar-toggler hidden-md-up" type="button" data-toggle="collapse" data-target="#goldNavbar">
+                <button class="navbar-toggler hidden-md-up" type="button" data-toggle="collapse" data-target="#navbar">
                     &#9776;
                 </button>
 
-                <div class="collapse navbar-toggleable-sm" id="goldNavbar">
+                <div class="collapse navbar-toggleable-sm" id="navbar">
                     <ul class="nav navbar-nav">
                         <li class="nav-item{% if request.resolver_match.url_name == "index" %} active{% endif %}">
                             <a href="{% url "index" %}" class="nav-link">Home</a>
                         </li>
-                        <li class="nav-item{% if request.resolver_match.url_name == "all" %} active{% endif %}">
-                            <a href="{% url "prints:all" %}" class="nav-link">Przeglądaj</a>
+                        <li class="nav-item{% if request.resolver_match.url_name == "collection" %} active{% endif %}">
+                            <a href="{% url "prints:collection" %}" class="nav-link">Przeglądaj</a>
                         </li>
                         <li class="nav-item{% if request.resolver_match.url_name == "by_name" %} active{% endif %}">
                             <a href="{% url "prints:by_name" %}" class="nav-link">Indeks nazwisk</a>
@@ -29,9 +29,8 @@
                         </li>
                     </ul>
                 </div>
-
             </nav>
-
         </div>
+        <hr>
     </div>
 </div>
