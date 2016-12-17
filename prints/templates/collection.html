@@ -4,7 +4,7 @@
 
 {% block content %}
 {% block extra %}{% endblock %}
-<div class="row">
+<div class="row mix-container">
     {% include "print_set.html" %}
 </div>
 
@@ -12,5 +12,5 @@
 
 {% block script %}
 {{ block.super }}
-<script src="{% static "/js/mixitup.min.js" %}"></script>                 <!-- Bootstrap (http://v4-alpha.getbootstrap.com/) -->
+<script src="{% static "/js/mixitup.min.js" %}"></script>
 {% endblock %}

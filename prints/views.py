@@ -11,14 +11,14 @@ def search(request):
 
 def collection(request):
     paths = ["/img/data/Acta et literae_{}.jpg".format(i) for i in range(7)]
-    return render(request, "filter_prints.html", {'paths': paths})
+    return render(request, "by_name.html", {'prints': {letter: [random.choice(paths)]*random.randint(2, 5) for letter in LETTERS}, 'letters': LETTERS})
 
 
 def by_name(request, letter=None):
     paths = ["/img/data/Acta et literae_{}.jpg".format(i) for i in range(7)]
-    if letter:
-        paths = [path for path in paths if random.choice([True, False])]
-    return render(request, "by_name.html", {'paths': paths, 'letters': LETTERS})
+    # if letter:
+    #     paths = [path for path in paths if random.choice([True, False])]
+    return render(request, "by_name.html", {'prints': {letter: [random.choice(paths)]*random.randint(2, 5) for letter in LETTERS}, 'letters': LETTERS})
 
 
 def add(request):
@@ -27,4 +27,5 @@ def add(request):
 
 def filter(request):
     paths = ["/img/data/Acta et literae_{}.jpg".format(i) for i in range(7)]
-    return render(request, "print_set.html", {'paths': paths})
+    paths = [path for path in paths if random.choice([True, False])]
+    return render(request, "print_set.html", {'prints': paths})

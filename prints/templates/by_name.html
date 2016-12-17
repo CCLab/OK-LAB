@@ -1,13 +1,27 @@
 {% extends "collection.html" %}
 {% block title %}indeks nazwisk - starodruki{% endblock %}
 
+<button type="button" data-filter="all">Show all</button>
+
 {% block extra %}
 <div class="row">
-    <div class="col index-letters">
+    <div class="col index-letters controls">
         {% for letter in letters %}
-            <a href="{% url "prints:by_name" letter %}" class="gold-text index-letter">{{ letter }}</a>
+            <button type="button" class="link gold-text index-letter control" data-filter='[data-letter~="{{ letter }}"]'>{{ letter }}</button>
             <span class="print-info index-letter">  /  </span>
         {% endfor %}
     </div>
 </div>
+{% endblock %}
+
+{% block script %}
+{{ block.super }}
+
+<script>
+    var mixer = mixitup('.mix-container', {
+        controls: {
+            toggleDefault: 'none'
+        }
+    });
+</script>
 {% endblock %}

@@ -231,6 +231,11 @@ p { line-height: 1.9; }
 
 .form-control:focus { border-color: #906030; }
 
+button.link {
+    background: none;
+    border: none;
+}
+
 .index-letter {
     font-size: 1.65rem;
 }
