@@ -1,3 +1,4 @@
+import json
 import random
 
 from django.shortcuts import render
@@ -10,8 +11,8 @@ def search(request):
 
 
 def collection(request):
-    paths = ["/img/data/Acta et literae_{}.jpg".format(i) for i in range(7)]
-    return render(request, "by_name.html", {'prints': {letter: [random.choice(paths)]*random.randint(2, 5) for letter in LETTERS}, 'letters': LETTERS})
+    prints = [{'id': i, 'path': "img/data/Acta et literae_{}.jpg".format(i), 'idex': random.choice(LETTERS)} for i in range(7)]
+    return render(request, "filter_prints.html", {'prints': json.dumps(prints), 'letters': LETTERS})
 
 
 def by_name(request, letter=None):

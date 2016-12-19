@@ -1,3 +1,47 @@
-{% extends "collection.html" %}
+{% extends "collection.html" %}{% load static %}
 {% block title %}przeglądaj - starodruki{% endblock %}
 
+{% block extra %}
+
+{% endblock %}
+
+
+{% block script %}
+{{ block.super }}
+
+<script>
+
+    function render(print) {
+        return `
+<div class="col-xs-12 col-sm-6 col-md-4 col-lg-3 col-xl-2" data-ref="mix", >
+    <div class="content-box">
+        <img src="{% static "" %}${print.path}" alt="Image" class="margin-b-20 img-fluid fixed-img">
+        <h4 class="margin-b-20 brown-text">Lorem ipsum dolor #1</h4>
+        <p class="margin-b-20 print-info">Aenean cursus tellus mauris, quis
+        consequat mauris dapibus id. Donec
+        scelerisque porttitor pharetra</p>
+        <a href="#" class="brown-btn text-uppercase">Zobacz</a>
+        <hr>
+    </div>
+</div>
+`;
+    };
+
+    var mixer = mixitup('.mix-container', {
+        controls: {
+            toggleDefault: 'none'
+        },
+        data: {
+            uidKey: 'id'
+        },
+        render: {
+            target: render
+        },
+        selectors: {
+            target: '[data-ref="mix"]'
+        }
+    });
+    mixer.dataset({{ prints|safe }})
+</script>
+
+{% endblock %}

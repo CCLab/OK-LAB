@@ -77,7 +77,7 @@ h2 { font-size: 2.2rem; }
 
 }
 
-.gold-text { color: #906030; }
+.brown-text { color: #906030; }
 
 .section {
 	padding-top: 20px;
@@ -128,7 +128,7 @@ h4 {
 	line-height: 1.6;
 }
 
-.gold-btn {
+.brown-btn {
 	color: white;
 	background-color: #906030;
 	border: none;
@@ -137,8 +137,8 @@ h4 {
 	padding: 10px 30px;
 }
 
-.gold-btn:hover,
-.gold-btn:focus {
+.brown-btn:hover,
+.brown-btn:focus {
 	background-color: #3F2F2F;
 	color: white;
 	outline: none;
@@ -363,7 +363,7 @@ button.link {
 }
 
 @media (max-width: 897px) {
-	.gold-btn {
+	.brown-btn {
 		padding: 10px 15px;
 		font-size: 1rem;
 	}
@@ -451,7 +451,7 @@ button.link {
 @media (max-width: 543px) {
 	.footer-links-container { padding-left: 0; }
 	.xs-m-t { margin-top: 20px; }
-	.gold-btn { padding: 10px 30px; }
+	.brown-btn { padding: 10px 30px; }
 
 	.section {
 		padding-top: 0;
