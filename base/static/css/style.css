@@ -91,7 +91,7 @@ h2 { font-size: 2.2rem; }
     height: 500px;
 }
 
-.about-img-container { background-image: url('../img/tm-about-img.jpg');	}
+.about-img-container { background-image: url('../img/tm-about-img.jpg'); }
 .blog-img-container { background-image: url('../img/tm-blog-img.jpg'); }
 .contact-img-container { background-image: url('../img/tm-contact-img.jpg'); }
 
@@ -306,6 +306,7 @@ ul.print-info {
 .info-item {
     width: 100%;
     overflow: hidden;
+    padding-bottom: 2%;
 }
 
 .info-label {
@@ -557,13 +558,13 @@ a.share:hover {
         margin: 0 auto;
     }
 
-    .blog-post {	padding-bottom: 10px; }
+    .blog-post {    padding-bottom: 10px; }
     .content-box-contact {
         margin-top: 40px;
         margin-bottom: 0;
     }
 
-    .contact-row-related-posts {	margin-top: 40px; }
+    .contact-row-related-posts {    margin-top: 40px; }
 }
 
 @media (max-width: 543px) {
