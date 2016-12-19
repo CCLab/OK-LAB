@@ -61,6 +61,10 @@ h2 { font-size: 2.2rem; }
     font-weight: 400;
 }
 
+.site-name:hover {
+    color: #222222;
+}
+
 .main-nav { font-size: 1.2rem; }
 
 .navbar-nav .nav-link {
@@ -369,6 +373,18 @@ a.share:hover {
     background-color: #906030;
 }
 
+
+.title-page {
+    padding-left: 10px;
+    padding-right: 10px;
+}
+
+
+
+
+
+
+
 @media (max-height: 550px) {
     .search-section {
         padding-top: 70px;
@@ -396,6 +412,10 @@ a.share:hover {
 }
 
 @media (max-width: 991px){
+
+    ul.print-info {
+        font-size: 23px;
+    }
 
     .home-img-container {
         background:none;
@@ -458,6 +478,10 @@ a.share:hover {
 }
 
 @media (max-width: 897px) {
+    ul.print-info {
+        font-size: 20px;
+    }
+
     .brown-btn {
         padding: 10px 15px;
         font-size: 1rem;
@@ -465,6 +489,10 @@ a.share:hover {
 }
 
 @media (max-width: 767px) {
+    ul.print-info {
+        font-size: 18px;
+    }
+
     .main-nav {
         position: fixed;
         right: 0;
