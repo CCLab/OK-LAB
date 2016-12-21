@@ -22,9 +22,6 @@ def by_name(request, letter=None):
     return render(request, "by_name.html", {'prints': {letter: [random.choice(paths)]*random.randint(2, 5) for letter in LETTERS}, 'letters': LETTERS})
 
 
-def add(request):
-    return search(request)
-
 
 def filter(request):
     paths = ["/img/data/Acta et literae_{}.jpg".format(i) for i in range(7)]
