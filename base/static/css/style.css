@@ -83,17 +83,6 @@ h2 { font-size: 2.2rem; }
 
 .brown-text { color: #906030; }
 
-.home-img-container {
-    background-image: url('../img/tm-home-img.jpg');
-    background-size: auto;
-    background-position: center;
-    background-repeat: no-repeat;
-    height: 500px;
-}
-
-.about-img-container { background-image: url('../img/tm-about-img.jpg'); }
-.blog-img-container { background-image: url('../img/tm-blog-img.jpg'); }
-.contact-img-container { background-image: url('../img/tm-contact-img.jpg'); }
 
 .about-img-container,
 .blog-img-container,
@@ -125,22 +114,6 @@ h3 { font-size: 1.65rem; }
 h4 { 
     font-size: 1.4rem;
     line-height: 1.6;
-}
-
-.brown-btn {
-    color: white;
-    background-color: #906030;
-    border: none;
-    border-radius: 0px;
-    display: inline-block;
-    padding: 10px 30px;
-}
-
-.brown-btn:hover,
-.brown-btn:focus {
-    background-color: #3F2F2F;
-    color: white;
-    outline: none;
 }
 
 .gray-btn { background-color: #656565; }
@@ -230,13 +203,13 @@ p { line-height: 1.9; }
 
 .aside-r { padding-left: 30px; }
 
-.form-control {
-    border-radius: 0;
-    font-size: 1.1rem;
-    padding: 0.75rem 1rem;
-}
 
-.form-control:focus { border-color: #906030; }
+
+
+
+
+
+
 
 button.link {
     background: none;
@@ -262,16 +235,99 @@ button.index-letter:hover {
     padding-right: 20px;
 }
 
-.search-form-control {
 
+
+
+
+
+
+form {
+    margin: 0 auto;
+    overflow: hidden;
+    padding-top: 20px;
+    display: table-cell;
+    border: 0;
+    width: 100%;
+    text-align: center;
+}
+
+form,
+form input {
+    border-radius: 0;
+    font-size: 1.1rem;
+    padding: 0.75rem 1rem;
+    line-height: 1.5;
+    color: #191919;
+    background-color: #fff;
+    background-image: none;
+}
+
+form input:focus { border-color: #906030; }
+
+form label {
+  min-width: 150px;
+  display: inline-block;
+}
+
+form input {
+  width: 40%;
+  border: 1px solid #ccc;
 }
 
 .input-group-btn {
     padding-left: 15px;
 }
 
+
+form button,
+.brown-btn {
+    border-radius: 0;
+    color: white;
+    background-color: #906030;
+    border: none;
+    border-radius: 0px;
+    display: inline-block;
+    padding: 10px 30px;
+}
+
+form button:hover,
+form button:focus,
+.brown-btn:hover,
+.brown-btn:focus {
+    background-color: #191919;
+    color: white;
+    outline: none;
+}
+
+
+form.login{
+    max-width: 600px;
+    width: 60%;
+}
+
+form.search {
+    position: relative;
+    display: table;
+    border-collapse: separate;
+}
+
+form.search input {
+    display: inline-cell;
+    max-width: 70%;
+    min-width: 60%;
+}
+
+form.search button {
+    display: inline-cell;
+}
+
+
+
+
+
+
+
 .form-description { margin-top: 30px; }
-.default-form { padding-top: 20px; }
 
 .contact-right { padding-left: 30px; }
 .p-small { font-size: 1rem; }
@@ -379,6 +435,27 @@ a.share:hover {
     padding-left: 10px;
     padding-right: 10px;
 }
+
+
+div.logout {
+    padding-top: 20px;
+    text-align: center;
+}
+div.logout h1 {
+    font-size: 36px;
+}
+
+
+.user-info {
+    text-align: center;
+}
+.user-info a {
+    color: #656565;
+}
+.user-info a:hover {
+    color: #222222;
+}
+
 
 
 

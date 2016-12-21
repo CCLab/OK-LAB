@@ -1,10 +1,16 @@
+import os
+
+from django.contrib.auth.models import User
 from django.db import models
+from django.conf import settings
+
 
 # Create your models here.
 
 
 class OldPrint(models.Model):
     id = models.AutoField(primary_key=True)
+    owner = models.ForeignKey(User)
     title_page = models.ForeignKey('Scan', null=True)
     # author = models.CharField(max_length=2, blank=True)
     # lp = models.CharField(max_length=3, blank=True)
@@ -43,10 +49,26 @@ class OldPrint(models.Model):
     daten_od = models.DateField(blank=True)
     daten_do = models.DateField(blank=True)
 
+    @property
+    def directory(self):
+        return os.path.join(settings.STATIC_ROOT, 'img', 'data', str(self.id))
+
 
 class Scan(models.Model):
     id = models.AutoField(primary_key=True)
     old_print = models.ForeignKey('OldPrint')
-    path = models.FilePathField()
+    page_number = models.IntegerField()
+    format = models.CharField(max_length=8, )
 
+    @property
+    def file_name(self):
+        return '.'.join([str(self.page_number), self.format])
 
+    @property
+    def path(self):
+        return os.path.join(self.old_print.directory, str(self.file_name))
+
+    def set_image(self, image):
+        with open(self.path, 'wb+') as destination:
+            for chunk in image.chunks():
+                destination.write(chunk)

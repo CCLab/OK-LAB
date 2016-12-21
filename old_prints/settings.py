@@ -31,7 +31,7 @@ ALLOWED_HOSTS = []
 # Application definition
 
 INSTALLED_APPS = [
-    'management'
+    'management',
     'prints',
     'base',
     'django.contrib.admin',
@@ -126,6 +126,9 @@ STATIC_ROOT = os.path.join(BASE_DIR, 'static')
 
 STATIC_SITES = {template.split('.html')[0]: os.path.join('static_sites', template)
                 for template in os.listdir(os.path.join(BASE_DIR, 'base', 'templates', 'static_sites'))}
+
+
+LOGIN_URL = '/login/'
 
 try:
     from local_settings import *

@@ -4,11 +4,16 @@ import os
 
 from django.conf.urls import url
 from django.conf import settings
+from django.contrib.auth.views import login, logout
+from django.shortcuts import redirect
+
 from . import views
-from glob import glob
 
 urlpatterns = [
     url(r'^$', views.home, name='index'),
+    url(r'^login/$', login, {'template_name': 'login.html'}, name='login'),
+    url(r'^logout/$', logout, {'template_name': 'logout.html'}, name='logout'),
+
 ]
 
 urlpatterns += [url(r'^{}/$'.format(name), views.static_site(file), name=name)
