@@ -8,7 +8,7 @@ from . import views
 from glob import glob
 
 urlpatterns = [
-    url(r'^$', views.index, name='index'),
+    url(r'^$', views.home, name='index'),
 ]
 
 urlpatterns += [url(r'^{}/$'.format(name), views.static_site(file), name=name)

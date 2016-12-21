@@ -1,8 +1,8 @@
 from django.shortcuts import render
 
 
-def index(request):
-    return render(request, 'index.html')
+def home(request):
+    return render(request, 'search.html')
 
 
 def static_site(template_name):

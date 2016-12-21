@@ -7,7 +7,7 @@ LETTERS = [chr(i) for i in range(65, 91)]
 
 
 def search(request):
-    return render(request, "index.html")
+    return render(request, "search.html")
 
 
 def collection(request):
