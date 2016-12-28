@@ -16,11 +16,12 @@ Including another URLconf
 from django.conf.urls import url, include
 from django.contrib import admin
 
+from prints import views as prints
 
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
     url(r'^', include('base.urls')),
     url(r'^prints/', include('prints.urls', namespace='prints')),
     url(r'^manage/', include('management.urls', namespace='management')),
-
+    url(r'^api/v1/prints/(?P<page>\d+)/$', prints.filter, name='filter'),
 ]

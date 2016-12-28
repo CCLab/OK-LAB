@@ -54,10 +54,10 @@ class OldPrint(models.Model):
         return os.path.join(settings.STATIC_ROOT, 'img', 'data', str(self.id))
 
     @property
-    def json(self):
+    def dict(self):
         return {
             "id": self.id,
-            "title_page": self.title_page,
+            "title_page": self.title_page.path if self.title_page else settings.DEFAULT_TITLE_PAGE,
             "title": self.title,
             "title_page_content": self.title_page_content,
             "title_variant": self.title_variant,

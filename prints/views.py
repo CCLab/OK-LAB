@@ -1,6 +1,9 @@
 import json
 import random
 
+from django.conf import settings
+from django.core.paginator import Paginator
+from django.http import HttpResponse
 from django.shortcuts import render, get_object_or_404
 
 from prints.models import OldPrint
@@ -12,11 +15,33 @@ def search(request):
     return render(request, "search.html")
 
 
+def filter(request=None, page=1, filter=None, order=None):
+    try:
+        queryset = OldPrint.objects
+        if filter:
+            queryset = filter.apply(queryset)
+        else:
+            queryset = queryset.all()
+        if order:
+            queryset = queryset.order_by(order)
+        paginator = Paginator(queryset, settings.PRINTS_PER_PAGE)
+
+        prints = [old_print.dict for old_print in paginator.page(page)]
+    except:
+        prints = []
+    # paths = ["/img/data/Acta et literae_{}.jpg".format(i) for i in range(7)]
+    # paths = [path for path in paths if random.choice([True, False])]
+    # return render(request, "print_set.html", {'prints': paths})
+    if request:
+        return HttpResponse(json.dumps(prints))
+    json.dumps(prints)
+
+
 def collection(request):
-    old_prints = OldPrint.query.all()
-    # prints = [{'id': i, 'path': "img/data/Acta et literae_{}.jpg".format(i), 'idex': random.choice(LETTERS)} for i in
-    #           range(7)]
-    return render(request, "filter_prints.html", {'prints': json.dumps(prints), 'letters': LETTERS})
+    prints = filter(page=1)
+    return render(request, "filter_prints.html", {'prints': prints,
+                                                  'letters': LETTERS,
+                                                  'default_title_page': settings.DEFAULT_TITLE_PAGE})
 
 
 def by_name(request, letter=None):
@@ -28,14 +53,9 @@ def by_name(request, letter=None):
                    'letters': LETTERS})
 
 
-def filter(request):
-    paths = ["/img/data/Acta et literae_{}.jpg".format(i) for i in range(7)]
-    paths = [path for path in paths if random.choice([True, False])]
-    return render(request, "print_set.html", {'prints': paths})
-
-
 def single(request, id):
-    return render(request, "single.html", {'print': get_object_or_404(OldPrint, id=id)})
+    return render(request, "single.html", {'print': get_object_or_404(OldPrint, id=id),
+                                           'default_title_page': settings.DEFAULT_TITLE_PAGE})
 
 
 def view(request, id):

@@ -10,7 +10,7 @@
             {% if print.title_page %}
             <img src="{% static print.title_page.path %}" alt="Strona tytułowa" class="title-img">
             {% else %}
-            <img src="{% static "img/no-title-page.png" %}" alt="(Brak strony tytułowej)" class="title-img">
+            <img src="{% static default_title_page %}" alt="(Brak strony tytułowej)" class="title-img">
             {% endif %}
         </div>
         <hr />

@@ -131,6 +131,11 @@ STATIC_SITES = {template.split('.html')[0]: os.path.join('static_sites', templat
 LOGIN_URL = '/login/'
 LOGIN_REDIRECT_URL = '/'
 
+DEFAULT_TITLE_PAGE = "img/no-title-page.png"
+
+PRINTS_PER_PAGE = 24
+
+
 try:
     from local_settings import *
 except:
