@@ -314,9 +314,7 @@ form button,
 }
 
 form button:hover,
-form button:focus,
-.brown-btn:hover,
-.brown-btn:focus {
+.brown-btn:hover {
     background-color: #191919;
     color: white;
     outline: none;

@@ -7,9 +7,9 @@
 <div class="row">
     <div class="col-md-2">
         <form id="filter-form" class="filter-form">
-            <h5 class="brown-text t-title">Filtruj po:</h5>
+            <h5 class="brown-text t-title">Filtrowanie</h5>
 
-            {{form.as_p}}
+            {{ filter.form.as_p }}
 
             <button type="submit">Filtruj</button>
         </form>
@@ -29,25 +29,6 @@
 
 current_page = 1
 
-get_prints = function() {
-    $.get('{% static "api/v1/prints/" %}' + current_page.toString() + '/?' + $('#filter-form').serialize(), function(data) {
-        alert(data);
-    });
-}
-
-function render(print) {
-    return `
-<div class="col-xs-12 col-sm-6 col-md-4 col-lg-3 col-xl-3" data-ref="mix", >
-    <div class="content-box">
-        <img src="{% static "" %}${print.title_page}" alt="Strona tytułowa" class="margin-b-20 img-fluid fixed-img">
-        <h4 class="margin-b-20 brown-text">${print.title}</h4>
-        <p class="margin-b-20 print-info">${print.title_page_content}</p>
-        <a href="{% url "prints:single" 0 %}" class="brown-btn text-uppercase">Zobacz</a>
-        <hr>
-    </div>
-</div>
-`;};
-
 var mixer = mixitup('.mix-container', {
     controls: {
         toggleDefault: 'none'
@@ -62,14 +43,37 @@ var mixer = mixitup('.mix-container', {
         target: '[data-ref="mix"]'
     }
 });
+
+get_prints = function() {
+    $.get('/api/v1/prints/' + current_page.toString() + '/?' + $('#filter-form').serialize(), function(data) {
+        data = eval(data);
+        alert(data.length);
+        mixer.dataset(data);
+    });
+}
+
+function render(print) {
+    return `
+<div class="col-xs-12 col-sm-6 col-md-4 col-lg-3 col-xl-3" data-ref="mix", >
+    <div class="content-box">
+        <img src="{% static "" %}${print.title_page}" alt="Strona tytułowa" class="margin-b-20 img-fluid fixed-img">
+        <h4 class="margin-b-20 brown-text">${print.title}</h4>
+        <p class="margin-b-20 print-info">${print.title_page_content}</p>
+        <a href="/prints/single/${print.id}" class="brown-btn text-uppercase">Zobacz</a>
+        <hr>
+    </div>
+</div>
+`;};
+
 mixer.dataset({{ prints|safe }})
 
 $("#filter-form").submit(function(event){
     current_page = 1;
     get_prints();
+    return false;
 });
 
-$(document).ready(get_prints);
+//$(document).ready(get_prints);
 
 </script>
 

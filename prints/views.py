@@ -6,6 +6,7 @@ from django.core.paginator import Paginator
 from django.http import HttpResponse
 from django.shortcuts import render, get_object_or_404
 
+from prints.filters import PrintsFilter
 from prints.models import OldPrint
 
 LETTERS = [chr(i) for i in range(65, 91)]
@@ -15,34 +16,23 @@ def search(request):
     return render(request, "search.html")
 
 
-def filter(request=None, page=1, filter=None, order=None):
-    try:
-        queryset = OldPrint.objects
-        if filter:
-            queryset = filter.apply(queryset)
-        else:
-            queryset = queryset.all()
-        if order:
-            queryset = queryset.order_by(order)
-        paginator = Paginator(queryset, settings.PRINTS_PER_PAGE)
+def filter(request, page=1):
+    filter = PrintsFilter(request.GET)
+    filter.queryset.order_by('title')
 
-        prints = [old_print.dict for old_print in paginator.page(page)]
-    except:
-        prints = []
-    # paths = ["/img/data/Acta et literae_{}.jpg".format(i) for i in range(7)]
-    # paths = [path for path in paths if random.choice([True, False])]
-    # return render(request, "print_set.html", {'prints': paths})
-    if request:
-        print(request.GET)
-        return HttpResponse(json.dumps(prints))
-    return json.dumps(prints)
+    paginator = Paginator(filter.qs.order_by('title'), settings.PRINTS_PER_PAGE)
+
+    prints = [old_print.dict for old_print in paginator.page(page)]
+    return HttpResponse(json.dumps(prints))
 
 
 def collection(request):
-    prints = filter(page=1)
-    return render(request, "collection.html", {'prints': prints,
-                                                  'letters': LETTERS,
-                                                  'default_title_page': settings.DEFAULT_TITLE_PAGE})
+    paginator = Paginator(OldPrint.objects.all(), settings.PRINTS_PER_PAGE)
+    prints = [old_print.dict for old_print in paginator.page(1)]
+    return render(request, "collection.html", {'prints': json.dumps(prints),
+                                               'letters': LETTERS,
+                                               'default_title_page': settings.DEFAULT_TITLE_PAGE,
+                                               'filter': PrintsFilter()})
 
 
 def by_name(request, letter=None):
@@ -61,4 +51,3 @@ def single(request, id):
 
 def view(request, id):
     return render(request, "single.html", {'print': get_object_or_404(OldPrint, id=id)})
-
