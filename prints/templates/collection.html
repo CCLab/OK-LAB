@@ -4,8 +4,19 @@
 
 {% block content %}
 <div class="margin-t-small"></div>
-<div class="row mix-container">
-    {% include "print_set.html" %}
+<div class="row">
+    <div class="col-md-2">
+        <form id="filter-form" class="filter-form">
+            <h5 class="brown-text t-title">Filtruj po:</h5>
+
+            {{form.as_p}}
+
+            <button type="submit">Filtruj</button>
+        </form>
+    </div>
+    <div class="col-md-10">
+        <div class="row mix-container"></div>
+    </div>
 </div>
 
 {% endblock %}
@@ -16,9 +27,17 @@
 
 <script>
 
-    function render(print) {
-        return `
-<div class="col-xs-12 col-sm-6 col-md-4 col-lg-3 col-xl-2" data-ref="mix", >
+current_page = 1
+
+get_prints = function() {
+    $.get('{% static "api/v1/prints/" %}' + current_page.toString() + '/?' + $('#filter-form').serialize(), function(data) {
+        alert(data);
+    });
+}
+
+function render(print) {
+    return `
+<div class="col-xs-12 col-sm-6 col-md-4 col-lg-3 col-xl-3" data-ref="mix", >
     <div class="content-box">
         <img src="{% static "" %}${print.title_page}" alt="Strona tytułowa" class="margin-b-20 img-fluid fixed-img">
         <h4 class="margin-b-20 brown-text">${print.title}</h4>
@@ -27,24 +46,31 @@
         <hr>
     </div>
 </div>
-`;
-    };
+`;};
 
-    var mixer = mixitup('.mix-container', {
-        controls: {
-            toggleDefault: 'none'
-        },
-        data: {
-            uidKey: 'id'
-        },
-        render: {
-            target: render
-        },
-        selectors: {
-            target: '[data-ref="mix"]'
-        }
-    });
-    mixer.dataset({{ prints|safe }})
+var mixer = mixitup('.mix-container', {
+    controls: {
+        toggleDefault: 'none'
+    },
+    data: {
+        uidKey: 'id'
+    },
+    render: {
+        target: render
+    },
+    selectors: {
+        target: '[data-ref="mix"]'
+    }
+});
+mixer.dataset({{ prints|safe }})
+
+$("#filter-form").submit(function(event){
+    current_page = 1;
+    get_prints();
+});
+
+$(document).ready(get_prints);
+
 </script>
 
 {% endblock %}

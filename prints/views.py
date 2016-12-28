@@ -35,7 +35,7 @@ def filter(request=None, page=1, filter=None, order=None):
     if request:
         print(request.GET)
         return HttpResponse(json.dumps(prints))
-    json.dumps(prints)
+    return json.dumps(prints)
 
 
 def collection(request):
