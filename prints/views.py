@@ -13,8 +13,9 @@ def search(request):
 
 
 def collection(request):
-    prints = [{'id': i, 'path': "img/data/Acta et literae_{}.jpg".format(i), 'idex': random.choice(LETTERS)} for i in
-              range(7)]
+    old_prints = OldPrint.query.all()
+    # prints = [{'id': i, 'path': "img/data/Acta et literae_{}.jpg".format(i), 'idex': random.choice(LETTERS)} for i in
+    #           range(7)]
     return render(request, "filter_prints.html", {'prints': json.dumps(prints), 'letters': LETTERS})
 
 

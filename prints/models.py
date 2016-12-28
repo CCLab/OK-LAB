@@ -53,6 +53,43 @@ class OldPrint(models.Model):
     def directory(self):
         return os.path.join(settings.STATIC_ROOT, 'img', 'data', str(self.id))
 
+    @property
+    def json(self):
+        return {
+            "id": self.id,
+            "title_page": self.title_page,
+            "title": self.title,
+            "title_page_content": self.title_page_content,
+            "title_variant": self.title_variant,
+            "author_khw": self.author_khw,
+            "author_doc": self.author_doc,
+            "publication_place": self.publication_place,
+            "publisher_name": self.publisher_name,
+            "publication_date": self.publication_date,
+            "printing_place": self.printing_place,
+            "printing_house_name": self.printing_house_name,
+            "printing_date": self.printing_date,
+            "number_of_pages": self.number_of_pages,
+            "designation_illustration": self.designation_illustration,
+            "bibliography_format": self.bibliography_format,
+            "ownership_entries": self.ownership_entries,
+            "figerprint": self.figerprint,
+            "other_information": self.other_information,
+            "co_founder": self.co_founder,
+            "keywords": self.keywords,
+            "source_type": self.source_type,
+            "resource_identifier": self.resource_identifier,
+            "e_format": self.e_format,
+            "source": self.source,
+            "language_code": self.language_code,
+            "language": self.language,
+            "bookbinding_block": self.bookbinding_block,
+            "signature": self.signature,
+            "laws": self.laws,
+            "daten_from": self.daten_from,
+            "daten_to": self.daten_to,
+        }
+
 
 class Scan(models.Model):
     id = models.AutoField(primary_key=True)
