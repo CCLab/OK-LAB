@@ -1,10 +1,12 @@
 {% extends "base.html" %}
 
+{% block title %}{{ title }}{% endblock %}
+
 {% block content %}
 <div class="row">
     <div class="col">
         <form class="old-print-edit" method="POST" action="">
-            <h2 class="brown-text t-title">Nowy druk</h2>
+            <h2 class="brown-text t-title">{{ title }}</h2>
             {% csrf_token %}
 
             {{form.as_p}}

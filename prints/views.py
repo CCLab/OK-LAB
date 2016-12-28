@@ -1,10 +1,9 @@
 import json
 import random
 
-from django.contrib.auth.decorators import login_required
-from django.shortcuts import render, redirect
+from django.shortcuts import render, get_object_or_404
 
-from prints.forms import OldPrintForm
+from prints.models import OldPrint
 
 LETTERS = [chr(i) for i in range(65, 91)]
 
@@ -35,46 +34,9 @@ def filter(request):
 
 
 def single(request, id):
-    old_print = {
-        'path': 'img/data/Acta et literae_0.jpg',
-        'id': id,
-        'title': "Lorem ipsum",
-        'title_page': """ Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin ultrices, justo vel accumsan ultrices, est neque pellentesque metus, vitae congue diam libero in nunc. Vestibulum quis ex at arcu volutpat lacinia. Sed id orci in nisi congue condimentum. Maecenas egestas dolor ut metus congue congue. In faucibus risus ut consequat posuere. Nam lectus lacus, gravida a tempor non, vulputate non nisl. Donec arcu purus, molestie vel nibh vitae, viverra scelerisque arcu. Cras sed dignissim mi.\n\nMauris tempus eros sed felis egestas vulputate. Nullam laoreet efficitur bibendum. Morbi vitae facilisis felis. Pellentesque porta elementum urna eget venenatis. Aliquam tellus sapien, posuere a condimentum ut, mollis ac orci. Etiam fringilla hendrerit nisi, sed hendrerit turpis. Suspendisse mi sem, cursus eget nunc tincidunt, laoreet ultrices est. Praesent ex elit, iaculis nec turpis vitae, iaculis iaculis sapien. Duis felis dui, auctor sit amet lorem hendrerit, rhoncus facilisis arcu. Duis ut neque lorem. """,
-        'date': '1562',
-        'author': 'Lorem Ipsum Author',
-        'place': 'Lorem Ipsum Place',
-        'publisher': 'Lorem Ipsum Publisher',
-        'signature': 's.4.34',
-        'keywords': 'lorem ipsum dolor sit amet'.split(' ')
-    }
-
-    return render(request, "single.html", {'print': old_print})
+    return render(request, "single.html", {'print': get_object_or_404(OldPrint, id=id)})
 
 
 def view(request, id):
-    old_print = {
-        'path': 'img/data/Acta et literae_0.jpg',
-        'id': id,
-        'title': "Lorem ipsum",
-        'title_page': """ Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin ultrices, justo vel accumsan ultrices, est neque pellentesque metus, vitae congue diam libero in nunc. Vestibulum quis ex at arcu volutpat lacinia. Sed id orci in nisi congue condimentum. Maecenas egestas dolor ut metus congue congue. In faucibus risus ut consequat posuere. Nam lectus lacus, gravida a tempor non, vulputate non nisl. Donec arcu purus, molestie vel nibh vitae, viverra scelerisque arcu. Cras sed dignissim mi.\n\nMauris tempus eros sed felis egestas vulputate. Nullam laoreet efficitur bibendum. Morbi vitae facilisis felis. Pellentesque porta elementum urna eget venenatis. Aliquam tellus sapien, posuere a condimentum ut, mollis ac orci. Etiam fringilla hendrerit nisi, sed hendrerit turpis. Suspendisse mi sem, cursus eget nunc tincidunt, laoreet ultrices est. Praesent ex elit, iaculis nec turpis vitae, iaculis iaculis sapien. Duis felis dui, auctor sit amet lorem hendrerit, rhoncus facilisis arcu. Duis ut neque lorem. """,
-        'date': '1562',
-        'author': 'Lorem Ipsum Author',
-        'place': 'Lorem Ipsum Place',
-        'publisher': 'Lorem Ipsum Publisher',
-        'signature': 's.4.34',
-        'keywords': 'lorem ipsum dolor sit amet'.split(' ')
-    }
+    return render(request, "single.html", {'print': get_object_or_404(OldPrint, id=id)})
 
-    return render(request, "single.html", {'print': old_print})
-
-
-@login_required
-def add(request):
-    if request.method == 'POST':
-        form = OldPrintForm(request.POST)
-        if form.is_valid():
-            return redirect('prints:single', 0)
-    else:
-        form = OldPrintForm()
-
-    return render(request, 'form.html', {'form': form})

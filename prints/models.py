@@ -23,11 +23,11 @@ class OldPrint(models.Model):
     author_doc = models.CharField(max_length=64, blank=True, verbose_name='autor dokumentu')
     publication_place = models.CharField(max_length=32, blank=True, verbose_name='miejsce wydania')
     publisher_name = models.CharField(max_length=128, blank=True, verbose_name='wydawca')
-    publication_date = models.DateField(blank=True, verbose_name='data wydania')
+    publication_date = models.DateField(null=True, blank=True, verbose_name='data wydania')
     printing_place = models.CharField(max_length=32, blank=True, verbose_name='miejsce wydruku')
     printing_house_name = models.CharField(max_length=128, blank=True, verbose_name='drukarnia')
-    printing_date = models.DateField(blank=True, verbose_name='data wydruku')
-    number_of_pages = models.IntegerField(blank=True, verbose_name='ilość stron')
+    printing_date = models.DateField(null=True, blank=True, verbose_name='data wydruku')
+    number_of_pages = models.IntegerField(verbose_name='ilość stron')
     designation_illustration = models.CharField(max_length=32, blank=True, verbose_name='oznaczenia ilustracji')
     bibliography_format = models.CharField(max_length=32, blank=True, verbose_name='format bibliografii')
     # ???
@@ -46,8 +46,8 @@ class OldPrint(models.Model):
     signature = models.CharField(max_length=16, blank=True, verbose_name='sygnatura')
     laws = models.CharField(max_length=16, blank=True, verbose_name='prawa')
     # ???
-    daten_from = models.DateField(blank=True, verbose_name='datan od')
-    daten_to = models.DateField(blank=True, verbose_name='datan_do')
+    daten_from = models.DateField(null=True, blank=True, verbose_name='datan od')
+    daten_to = models.DateField(null=True, blank=True, verbose_name='datan_do')
 
     @property
     def directory(self):

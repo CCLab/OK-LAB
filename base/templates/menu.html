@@ -23,7 +23,7 @@
                         </li>
                         {% if user.is_authenticated %}
                         <li class="nav-item{% if request.resolver_match.url_name == "add" %} active{% endif %}">
-                            <a href="{% url "prints:add" %}" class="nav-link">Dodaj druki</a>
+                            <a href="{% url "management:add" %}" class="nav-link">Dodaj druki</a>
                         </li>
                         <li class="nav-item user-info">
                             <span>({{ user.username }})<br /></span>

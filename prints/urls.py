@@ -11,5 +11,4 @@ urlpatterns = [
     url(r'^by_name/(?:(?P<letter>[A-Z])/)?$', views.by_name, name='by_name'),
     url(r'^single/(?P<id>\d+)/$', views.single, name="single"),
     url(r'^view/(?P<id>\d+)/$', views.view, name="view"),
-    url(r'^add/$', views.add, name='add'),
 ]
