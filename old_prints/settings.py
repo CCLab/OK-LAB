@@ -129,6 +129,7 @@ STATIC_SITES = {template.split('.html')[0]: os.path.join('static_sites', templat
 
 
 LOGIN_URL = '/login/'
+LOGIN_REDIRECT_URL = '/'
 
 try:
     from local_settings import *

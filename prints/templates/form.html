@@ -1,17 +1,16 @@
 {% extends "base.html" %}
 
-
 {% block content %}
 <div class="row">
     <div class="col">
-        <form class="login" method="POST" action="/login/">
+        <form class="old-print-edit" method="POST" action="">
+            <h2 class="brown-text t-title">Nowy druk</h2>
             {% csrf_token %}
 
             {{form.as_p}}
 
-            <button type="submit">Zaloguj</button>
+            <button type="submit">Dodaj</button>
         </form>
     </div>
 </div>
-
 {% endblock %}

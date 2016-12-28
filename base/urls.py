@@ -1,11 +1,9 @@
 #!/usr/bin/python
 # coding: utf-8
-import os
 
 from django.conf.urls import url
 from django.conf import settings
 from django.contrib.auth.views import login, logout
-from django.shortcuts import redirect
 
 from . import views
 

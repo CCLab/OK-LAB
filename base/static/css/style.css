@@ -65,7 +65,10 @@ h2 { font-size: 2.2rem; }
     color: #222222;
 }
 
-.main-nav { font-size: 1.2rem; }
+.main-nav {
+    float: left;
+    font-size: 1.2rem;
+}
 
 .navbar-nav .nav-link {
     border-radius: 0px;
@@ -129,6 +132,7 @@ h4 {
 .margin-t-big { margin-top: 90px; }
 .margin-t-mid { margin-top: 60px; }
 .margin-t-small { margin-top: 30px; }
+.padding-r-30 { padding-right: 30px; }
 
 .text-link {
     color: #006699;
@@ -249,10 +253,16 @@ form {
     border: 0;
     width: 100%;
     text-align: center;
+    display: block;
+}
+
+form.old-print-edit p {
+    width: 100%;
 }
 
 form,
-form input {
+form input,
+form textarea {
     border-radius: 0;
     font-size: 1.1rem;
     padding: 0.75rem 1rem;
@@ -260,17 +270,30 @@ form input {
     color: #191919;
     background-color: #fff;
     background-image: none;
+
 }
 
-form input:focus { border-color: #906030; }
+form input:focus, form textarea:focus { border-color: #906030; }
+
+
+form .errorlist li {
+    list-style: none;
+    border: 1px solid #906030;
+}
 
 form label {
-  min-width: 150px;
+  min-width: 225px;
   display: inline-block;
+  vertical-align: middle;
+  text-align: left;
+  height: 100%;
 }
 
+
+form textarea,
 form input {
-  width: 40%;
+  width: 60%;
+  min-width: 200px;
   border: 1px solid #ccc;
 }
 
@@ -300,9 +323,20 @@ form button:focus,
 }
 
 
+
+form.old-print-edit,
 form.login{
-    max-width: 600px;
-    width: 60%;
+    max-width: 900px;
+    width: 100%;
+}
+form.login {
+    padding-top: 60px;
+}
+
+form.login label,
+form.login input {
+    min-width: 150px;
+    max-width: 400px;
 }
 
 form.search {
@@ -313,12 +347,14 @@ form.search {
 
 form.search input {
     display: inline-cell;
-    max-width: 70%;
-    min-width: 60%;
+    width: 70%;
+    margin-top: 20px;
+    max-width: 600px;
 }
 
 form.search button {
     display: inline-cell;
+    margin-top: 20px;
 }
 
 
@@ -357,6 +393,7 @@ form.search button {
 ul.print-info {
     list-style: none;
     font-size: 25px;
+    padding-right: 10px;
 }
 
 .info-item {
@@ -405,6 +442,7 @@ ul.share {
     vertical-align: baseline;
     display: inline;
     list-style: none;
+    padding: 20px;
 }
 
 li.share{
@@ -455,6 +493,19 @@ div.logout h1 {
 .user-info a:hover {
     color: #222222;
 }
+
+
+
+.button-box {
+    padding-left: 30px;
+}
+.button-box a {
+    width: 200px;
+    text-align: center;
+    margin-top: 10px;
+    margin-left: 10px;
+}
+
 
 
 

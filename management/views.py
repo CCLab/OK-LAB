@@ -8,11 +8,6 @@ def manage(request):
 
 
 @login_required
-def add(request):
-    return render(request, 'search.html')
-
-
-@login_required
 def edit(request, id):
     return render(request, 'search.html')
 
