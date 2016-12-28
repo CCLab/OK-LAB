@@ -33,13 +33,14 @@ def filter(request=None, page=1, filter=None, order=None):
     # paths = [path for path in paths if random.choice([True, False])]
     # return render(request, "print_set.html", {'prints': paths})
     if request:
+        print(request.GET)
         return HttpResponse(json.dumps(prints))
     json.dumps(prints)
 
 
 def collection(request):
     prints = filter(page=1)
-    return render(request, "filter_prints.html", {'prints': prints,
+    return render(request, "collection.html", {'prints': prints,
                                                   'letters': LETTERS,
                                                   'default_title_page': settings.DEFAULT_TITLE_PAGE})
 

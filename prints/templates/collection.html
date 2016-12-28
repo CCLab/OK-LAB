@@ -1,9 +1,9 @@
 {% extends "base.html" %}{% load static %}
-
+{% block title %}przeglądaj - starodruki{% endblock %}
 
 
 {% block content %}
-{% block extra %}{% endblock %}
+<div class="margin-t-small"></div>
 <div class="row mix-container">
     {% include "print_set.html" %}
 </div>
@@ -13,4 +13,38 @@
 {% block script %}
 {{ block.super }}
 <script src="{% static "/js/mixitup.min.js" %}"></script>
+
+<script>
+
+    function render(print) {
+        return `
+<div class="col-xs-12 col-sm-6 col-md-4 col-lg-3 col-xl-2" data-ref="mix", >
+    <div class="content-box">
+        <img src="{% static "" %}${print.title_page}" alt="Strona tytułowa" class="margin-b-20 img-fluid fixed-img">
+        <h4 class="margin-b-20 brown-text">${print.title}</h4>
+        <p class="margin-b-20 print-info">${print.title_page_content}</p>
+        <a href="{% url "prints:single" 0 %}" class="brown-btn text-uppercase">Zobacz</a>
+        <hr>
+    </div>
+</div>
+`;
+    };
+
+    var mixer = mixitup('.mix-container', {
+        controls: {
+            toggleDefault: 'none'
+        },
+        data: {
+            uidKey: 'id'
+        },
+        render: {
+            target: render
+        },
+        selectors: {
+            target: '[data-ref="mix"]'
+        }
+    });
+    mixer.dataset({{ prints|safe }})
+</script>
+
 {% endblock %}

@@ -1,9 +1,10 @@
-{% extends "collection.html" %}
+{% extends "base.html" %}{% load static %}
 {% block title %}indeks nazwisk - starodruki{% endblock %}
 
 <button type="button" data-filter="all">Show all</button>
 
-{% block extra %}
+
+{% block content %}
 <div class="row">
     <div class="col index-letters controls">
         {% for letter in letters %}
@@ -12,11 +13,15 @@
         {% endfor %}
     </div>
 </div>
+<div class="row mix-container">
+    {% include "print_set.html" %}
+</div>
+
 {% endblock %}
 
 {% block script %}
 {{ block.super }}
-
+<script src="{% static "/js/mixitup.min.js" %}"></script>
 <script>
     var mixer = mixitup('.mix-container', {
         controls: {

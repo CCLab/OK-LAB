@@ -1,13 +1,18 @@
-{% extends "collection.html" %}{% load static %}
+{% extends "base.html" %}{% load static %}
 {% block title %}przeglądaj - starodruki{% endblock %}
 
-{% block extra %}
-<div class="margin-t-small"></div>
-{% endblock %}
 
+{% block content %}
+<div class="margin-t-small"></div>
+<div class="row mix-container">
+    {% include "print_set.html" %}
+</div>
+
+{% endblock %}
 
 {% block script %}
 {{ block.super }}
+<script src="{% static "/js/mixitup.min.js" %}"></script>
 
 <script>
 
