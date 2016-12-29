@@ -5,7 +5,7 @@
 {% block content %}
 <div class="margin-t-small"></div>
 <div class="row">
-    <div class="col-md-2">
+    <div class="col-md-3 col-sm-4 col-lg-2">
         <form id="filter-form" class="filter-form">
             <h5 class="brown-text t-title">Filtrowanie</h5>
 
@@ -14,7 +14,7 @@
             <button type="submit">Filtruj</button>
         </form>
     </div>
-    <div class="col-md-10">
+    <div class="col-md-9 col-sm-8 col-lg-10">
         <div class="row mix-container"></div>
     </div>
 </div>
@@ -47,7 +47,6 @@ var mixer = mixitup('.mix-container', {
 get_prints = function() {
     $.get('/api/v1/prints/' + current_page.toString() + '/?' + $('#filter-form').serialize(), function(data) {
         data = eval(data);
-        alert(data.length);
         mixer.dataset(data);
     });
 }
@@ -57,15 +56,14 @@ function render(print) {
 <div class="col-xs-12 col-sm-6 col-md-4 col-lg-3 col-xl-3" data-ref="mix", >
     <div class="content-box">
         <img src="{% static "" %}${print.title_page}" alt="Strona tytułowa" class="margin-b-20 img-fluid fixed-img">
-        <h4 class="margin-b-20 brown-text">${print.title}</h4>
-        <p class="margin-b-20 print-info">${print.title_page_content}</p>
+        <h4 class="margin-b-0 brown-text">${print.title}</h4>
+        <p class="margin-b-0 print-info">${print.author_khw}</p>
+        <p class="margin-b-20 print-info"><i>(${print.publication_date})</i></p>
         <a href="/prints/single/${print.id}" class="brown-btn text-uppercase">Zobacz</a>
         <hr>
     </div>
 </div>
 `;};
-
-mixer.dataset({{ prints|safe }})
 
 $("#filter-form").submit(function(event){
     current_page = 1;
@@ -73,7 +71,7 @@ $("#filter-form").submit(function(event){
     return false;
 });
 
-//$(document).ready(get_prints);
+$(document).ready(get_prints);
 
 </script>
 

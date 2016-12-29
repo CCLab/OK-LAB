@@ -136,6 +136,19 @@ DEFAULT_TITLE_PAGE = "img/no-title-page.png"
 PRINTS_PER_PAGE = 24
 
 
+def FILTERS_VERBOSE_LOOKUPS():
+    from django_filters.conf import DEFAULTS
+
+    verbose_lookups = DEFAULTS['VERBOSE_LOOKUPS'].copy()
+    verbose_lookups.update({
+        'exact': '',
+        'contains': '',
+        'lt': 'mniejsza niż',
+        'gt': 'większa niż'
+    })
+    return verbose_lookups
+
+
 try:
     from local_settings import *
 except:

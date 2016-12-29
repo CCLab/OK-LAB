@@ -18,21 +18,16 @@ def search(request):
 
 def filter(request, page=1):
     filter = PrintsFilter(request.GET)
-    filter.queryset.order_by('title')
-
     paginator = Paginator(filter.qs.order_by('title'), settings.PRINTS_PER_PAGE)
 
-    prints = [old_print.dict for old_print in paginator.page(page)]
+    prints = [old_print.smart_dict for old_print in paginator.page(page)]
     return HttpResponse(json.dumps(prints))
 
 
 def collection(request):
-    paginator = Paginator(OldPrint.objects.all(), settings.PRINTS_PER_PAGE)
-    prints = [old_print.dict for old_print in paginator.page(1)]
-    return render(request, "collection.html", {'prints': json.dumps(prints),
-                                               'letters': LETTERS,
-                                               'default_title_page': settings.DEFAULT_TITLE_PAGE,
-                                               'filter': PrintsFilter()})
+    filter = PrintsFilter(request.GET)
+    return render(request, "collection.html", {'default_title_page': settings.DEFAULT_TITLE_PAGE,
+                                               'filter': filter})
 
 
 def by_name(request, letter=None):

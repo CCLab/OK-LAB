@@ -76,7 +76,7 @@ class OldPrint(models.Model):
             "figerprint": self.figerprint,
             "other_information": self.other_information,
             "co_founder": self.co_founder,
-            "keywords": self.keywords,
+            "keywords": self.key_words,
             "source_type": self.source_type,
             "resource_identifier": self.resource_identifier,
             "e_format": self.e_format,
@@ -90,6 +90,20 @@ class OldPrint(models.Model):
             "daten_to": self.daten_to,
         }
 
+    @property
+    def smart_dict(self):
+        return {
+            "id": self.id,
+            "title_page": self.title_page.path if self.title_page else settings.DEFAULT_TITLE_PAGE,
+            "title": self.title,
+            # "title_page_content": self.title_page_content,
+            "author_khw": self.author_khw,
+            "publication_date": self.publication_date if self.publication_date else 'nieznana',
+        }
+
+    @property
+    def key_words(self):
+        return self.keywords.split(' ')
 
 class Scan(models.Model):
     id = models.AutoField(primary_key=True)

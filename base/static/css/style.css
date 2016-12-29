@@ -111,6 +111,12 @@ h2 { font-size: 2.2rem; }
     max-width: 310px;
     margin: 0 auto;
     margin-bottom: 50px;
+    height: 450px;
+    text-align: center;
+}
+.content-box p,
+.content-box h4{
+    text-align: left;
 }
 
 h3 { font-size: 1.65rem; }
@@ -125,6 +131,10 @@ h4 {
     background-color: #515050;
 }
 
+
+.margin-b-0 { margin-bottom: 0px; }
+.margin-b-5 { margin-bottom: 5px; }
+.margin-b-10 { margin-bottom: 10px; }
 .margin-b-15 { margin-bottom: 15px; }
 .margin-b-20 { margin-bottom: 20px; }
 .margin-b-30 { margin-bottom: 30px; }
@@ -206,8 +216,6 @@ p { line-height: 1.9; }
 }
 
 .aside-r { padding-left: 30px; }
-
-
 
 
 
@@ -320,6 +328,25 @@ form button:hover,
     outline: none;
 }
 
+form.filter-form{
+    padding-top: 0;
+}
+
+form.filter-form input,
+form.filter-form label{
+    font-size: 14px;
+    width: 100%;
+    max-width: 200px;
+    min-width: 50px;
+    padding: 2px;
+    margin: 0;
+}
+
+form.filter-form p {
+    margin: 0;
+    margin-bottom: 5px;
+    line-height: 1;
+}
 
 
 form.old-print-edit,
@@ -354,6 +381,8 @@ form.search button {
     display: inline-cell;
     margin-top: 20px;
 }
+
+
 
 
 

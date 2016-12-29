@@ -21,9 +21,9 @@
     <div class="col-xs-12 col-sm-7 col-md-7 col-lg-6 col-xl-6 padding-r-30">
         <div class="row">
             <ul class="keywords">
-                {% for keyword in print.keywords %}
+                {% for keyword in print.key_words %}
                     <li class="keyword">
-                        <a href="" class="keyword">{{ keyword }}</a>
+                        <a href="{% url "prints:collection" %}?keywords__contains={{ keyword }}" class="keyword">{{ keyword }}</a>
                     </li>
                 {% endfor %}
             </ul>
