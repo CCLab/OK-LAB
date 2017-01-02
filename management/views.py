@@ -1,8 +1,9 @@
 from django.contrib.auth.decorators import login_required
 from django.shortcuts import render, get_object_or_404, redirect
-
+from django.http import HttpResponse, HttpResponseBadRequest
 from management.forms import OldPrintForm
-from prints.models import OldPrint
+from prints.models import OldPrint, Scan
+import os
 
 
 @login_required
@@ -42,3 +43,25 @@ def add(request):
         form = OldPrintForm()
 
     return render(request, 'form.html', {'form': form, 'title': 'Nowy druk'})
+
+
+def handle_uploaded_file(f, path):
+    with open(path, 'wb+') as destination:
+        for chunk in f.chunks():
+            destination.write(chunk)
+
+@login_required
+def upload_title_page(request, id):
+    if request.method == 'POST':
+        old_print = get_object_or_404(OldPrint, id=id)
+        scan = Scan()
+        scan.page_number = 0
+        scan.format = str(request.FILES['file']).split('.')[-1]
+        scan.old_print = old_print
+        scan.save()
+        old_print.title_page = scan
+        old_print.save()
+        os.makedirs(old_print.path)
+        handle_uploaded_file(request.FILES['file'], scan.path)
+        return HttpResponse("OK")
+    return HttpResponseBadRequest("ERROR")

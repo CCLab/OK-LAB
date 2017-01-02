@@ -50,14 +50,18 @@ class OldPrint(models.Model):
     daten_to = models.DateField(null=True, blank=True, verbose_name='datan_do')
 
     @property
-    def directory(self):
+    def path(self):
         return os.path.join(settings.STATIC_ROOT, 'img', 'data', str(self.id))
+
+    @property
+    def static(self):
+        return '/'.join(['img', 'data', str(self.id)])
 
     @property
     def dict(self):
         return {
             "id": self.id,
-            "title_page": self.title_page.path if self.title_page else settings.DEFAULT_TITLE_PAGE,
+            "title_page": self.title_page.static if self.title_page else settings.DEFAULT_TITLE_PAGE,
             "title": self.title,
             "title_page_content": self.title_page_content,
             "title_variant": self.title_variant,
@@ -116,10 +120,10 @@ class Scan(models.Model):
         return '.'.join([str(self.page_number), self.format])
 
     @property
-    def path(self):
-        return os.path.join(self.old_print.directory, str(self.file_name))
+    def static(self):
+        return '/'.join([self.old_print.static, str(self.file_name)])
 
-    def set_image(self, image):
-        with open(self.path, 'wb+') as destination:
-            for chunk in image.chunks():
-                destination.write(chunk)
+    @property
+    def path(self):
+        return os.path.join(self.old_print.path, str(self.file_name))
+

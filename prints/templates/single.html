@@ -6,11 +6,13 @@
 <div class="row">
     <h3 class="brown-text print-title margin-b-20">{{ print.title }}</h3>
     <div class="col-xs-12 col-sm-5 col-md-5 col-lg-6 col-xl-6">
-        <div class="row margin-b-30">
+        <div class="row margin-b-30 text-center">
             {% if print.title_page %}
-            <img src="{% static print.title_page.path %}" alt="Strona tytułowa" class="title-img">
+            <img src="{% static print.title_page.static %}" alt="Strona tytułowa" class="title-img">
             {% else %}
-            <img src="{% static default_title_page %}" alt="(Brak strony tytułowej)" class="title-img">
+            <span onclick="$('#drop-title-page').show()" class="default-title-page" style="background-image: url({% static "img/add.png" %})">
+                <img src="{% static default_title_page %}" alt="(Brak strony tytułowej)" class="title-img" />
+            </span>
             {% endif %}
         </div>
         <hr />
@@ -80,4 +82,29 @@
     </div>
 </div>
 
+<div class="overlay-page" id="drop-title-page">
+    <form action="{% url "management:upload_title_page" print.id %}" class="dropzone" id="title-page-dropzone"></form>
+</div>
+{% endblock %}
+{% block script %}
+{{ block.super }}
+<script src="{% static "js/dropzone.js" %}"></script>
+<script>
+$('#drop-title-page').click(function(e){
+    $('#drop-title-page').hide();
+}).children().click(function(e) {return false;});
+
+Dropzone.options.titlePageDropzone = {
+  maxFilesize: 100, // MB
+  maxFiles: 1,
+
+  success: function(e, response){
+    $('#drop-title-page').hide();
+  },
+  headers: {
+    'X-CSRFToken': '{{ csrf_token }}'
+  }
+};
+
+</script>
 {% endblock %}
