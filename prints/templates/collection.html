@@ -56,9 +56,9 @@ function render(print) {
 <div class="col-xs-12 col-sm-6 col-md-4 col-lg-3 col-xl-3" data-ref="mix", >
     <div class="content-box">
         <img src="{% static "" %}${print.title_page}" alt="Strona tytułowa" class="margin-b-20 img-fluid fixed-img">
-        <h4 class="margin-b-0 brown-text">${print.title}</h4>
-        <p class="margin-b-0 print-info">${print.author_khw}</p>
-        <p class="margin-b-20 print-info"><i>(${print.publication_date})</i></p>
+        <h4 class="margin-b-0 brown-text" title="${print.title}">${print.title}</h4>
+        <p class="margin-b-0 print-info" title="${print.author_khw}">${print.author_khw}</p>
+        <p class="margin-b-20 print-info" title="${print.publication_date}"><i>(${print.publication_date})</i></p>
         <a href="/prints/single/${print.id}" class="brown-btn text-uppercase">Zobacz</a>
         <hr>
     </div>
@@ -72,6 +72,7 @@ $("#filter-form").submit(function(event){
 });
 
 $(document).ready(get_prints);
+
 
 </script>
 

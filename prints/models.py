@@ -98,7 +98,7 @@ class OldPrint(models.Model):
     def smart_dict(self):
         return {
             "id": self.id,
-            "title_page": self.title_page.path if self.title_page else settings.DEFAULT_TITLE_PAGE,
+            "title_page": self.title_page.static if self.title_page else settings.DEFAULT_TITLE_PAGE,
             "title": self.title,
             # "title_page_content": self.title_page_content,
             "author_khw": self.author_khw,

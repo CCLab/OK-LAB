@@ -115,9 +115,15 @@ h2 { font-size: 2.2rem; }
     text-align: center;
 }
 .content-box p,
-.content-box h4{
+.content-box h4 {
     text-align: left;
+    overflow: hidden;
+    text-overflow: clip;
+    height: 40px;
+
 }
+
+
 
 h3 { font-size: 1.65rem; }
 h4 { 
@@ -442,7 +448,13 @@ form.search button {
 
 
 
-
+.ellipsis {
+    text-overflow: ellipsis;
+    overflow: hidden;
+    white-space: nowrap;
+    max-width: 100%;
+    position: relative;
+}
 
 
 
