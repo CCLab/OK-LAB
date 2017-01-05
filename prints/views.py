@@ -21,7 +21,7 @@ def filter(request, page=1):
     paginator = Paginator(filter.qs.order_by('title'), settings.PRINTS_PER_PAGE)
 
     prints = [old_print.smart_dict for old_print in paginator.page(page)]
-    return HttpResponse(json.dumps(prints))
+    return HttpResponse(json.dumps({'job': int(request.GET['job']), 'data': prints}))
 
 
 def collection(request):

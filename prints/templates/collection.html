@@ -11,7 +11,7 @@
 
             {{ filter.form.as_p }}
 
-            <button type="submit">Filtruj</button>
+            <!--<button type="submit">Filtruj</button>-->
         </form>
     </div>
     <div class="col-md-9 col-sm-8 col-lg-10">
@@ -27,7 +27,8 @@
 
 <script>
 
-current_page = 1
+var current_page = 1;
+var job = 0;
 
 var mixer = mixitup('.mix-container', {
     controls: {
@@ -45,9 +46,12 @@ var mixer = mixitup('.mix-container', {
 });
 
 get_prints = function() {
-    $.get('/api/v1/prints/' + current_page.toString() + '/?' + $('#filter-form').serialize(), function(data) {
+    job = (job + 1) % 65535;
+    $.get('/api/v1/prints/' + current_page.toString() + '/?' + $('#filter-form').serialize() + '%26' + 'job=' + job.toString(), function(data) {
         data = eval(data);
-        mixer.dataset(data);
+        if (data.job === job){
+            mixer.dataset(data.data);
+        }
     });
 }
 
@@ -65,10 +69,9 @@ function render(print) {
 </div>
 `;};
 
-$("#filter-form").submit(function(event){
+$("#filter-form input").bind('input', function() {
     current_page = 1;
     get_prints();
-    return false;
 });
 
 $(document).ready(get_prints);
