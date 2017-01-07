@@ -45,4 +45,6 @@ def single(request, id):
 
 
 def view(request, id):
-    return render(request, "single.html", {'print': get_object_or_404(OldPrint, id=id)})
+    old_print = get_object_or_404(OldPrint, id=id)
+    pages = old_print.scan_set.all()
+    return render(request, "scan_set.html", {'default_title_page': settings.DEFAULT_TITLE_PAGE})

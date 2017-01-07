@@ -86,8 +86,7 @@
     <form action="{% url "management:upload_title_page" print.id %}" class="dropzone" id="title-page-dropzone"></form>
 </div>
 {% endblock %}
-{% block script %}
-{{ block.super }}
+{% block extra_script %}
 <script src="{% static "js/dropzone.js" %}"></script>
 <script>
 $('#drop-title-page').click(function(e){

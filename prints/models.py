@@ -58,10 +58,14 @@ class OldPrint(models.Model):
         return '/'.join(['img', 'data', str(self.id)])
 
     @property
+    def title_page_or_default(self):
+        return self.title_page.static if self.title_page else settings.DEFAULT_TITLE_PAGE
+
+    @property
     def dict(self):
         return {
             "id": self.id,
-            "title_page": self.title_page.static if self.title_page else settings.DEFAULT_TITLE_PAGE,
+            "title_page": self.title_page_or_default,
             "title": self.title,
             "title_page_content": self.title_page_content,
             "title_variant": self.title_variant,
