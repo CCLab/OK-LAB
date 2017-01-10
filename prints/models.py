@@ -113,11 +113,14 @@ class OldPrint(models.Model):
     def key_words(self):
         return self.keywords.split(' ')
 
+
 class Scan(models.Model):
     id = models.AutoField(primary_key=True)
     old_print = models.ForeignKey('OldPrint')
     page_number = models.IntegerField()
-    format = models.CharField(max_length=8, )
+    format = models.CharField(max_length=8)
+    # height = models.IntegerField()
+    # width = models.IntegerField()
 
     @property
     def file_name(self):
