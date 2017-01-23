@@ -24,4 +24,5 @@ urlpatterns = [
     url(r'^prints/', include('prints.urls', namespace='prints')),
     url(r'^manage/', include('management.urls', namespace='management')),
     url(r'^api/v1/prints/(?P<page>\d+)/$', prints.filter, name='filter'),
+    url(r'^api/v1/name_index/(?P<page>\d+)/$', prints.name_index, name='name_index'),
 ]

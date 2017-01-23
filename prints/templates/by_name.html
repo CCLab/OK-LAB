@@ -8,25 +8,83 @@
 <div class="row">
     <div class="col index-letters controls">
         {% for letter in letters %}
-            <button type="button" class="link brown-text index-letter control" data-filter='[data-letter~="{{ letter }}"]'>{{ letter }}</button>
+            <button type="button" class="link brown-text index-letter control" onclick="javascript:get_prints('{{ letter }}')">{{ letter }}</button>
             <span class="print-info index-letter">  /  </span>
         {% endfor %}
     </div>
 </div>
 <div class="row mix-container">
-    {% include "print_set.html" %}
+    {% for letter, print in prints.items %}
+    {% for path in print %}
+
+    {% endfor %}
+    {% endfor %}
 </div>
 
 {% endblock %}
 
-{% block script %}
-{{ block.super }}
+{% block extra_script %}
 <script src="{% static "/js/mixitup.min.js" %}"></script>
+
 <script>
-    var mixer = mixitup('.mix-container', {
-        controls: {
-            toggleDefault: 'none'
-        }
+
+var current_page = 1;
+var current_job = 0;
+
+var mixer = mixitup('.mix-container', {
+    controls: {
+        toggleDefault: 'none'
+    },
+    data: {
+        uidKey: 'id'
+    },
+    render: {
+        target: render
+    },
+    selectors: {
+        target: '[data-ref="mix"]'
+    }
+});
+
+function try_set(data) {
+    if (data.job != current_job) return;
+    if (mixer.isMixing()){
+        setTimeout(function (){try_set(data)}, 200);
+        return;
+    }
+    if (data.job == current_job){
+        mixer.dataset(data.data);
+    }
+}
+
+function get_prints(letter) {
+    current_job = (current_job + 1) % 65535;
+    $.get('/api/v1/name_index/' + current_page.toString() + '/?letter=' + letter + '&job=' + current_job.toString(), function(data) {
+        try_set($.parseJSON(data));
     });
+}
+
+function render(print) {
+    return `
+<div class="col-xs-12 col-sm-6 col-md-4 col-lg-3 col-xl-2" data-ref="mix", >
+    <div class="content-box">
+        <img src="{% static "" %}${print.title_page}" alt="Strona tytułowa" class="margin-b-20 img-fluid fixed-img">
+        <h4 class="margin-b-0 brown-text" title="${print.title}">${print.title}</h4>
+        <p class="margin-b-0 print-info" title="${print.author_khw}">${print.author_khw}</p>
+        <p class="margin-b-20 print-info" title="${print.publication_date}"><i>(${print.publication_date})</i></p>
+        <a href="/prints/single/${print.id}" class="brown-btn text-uppercase">Zobacz</a>
+        <hr>
+    </div>
+</div>
+`;};
+
+$("#filter-form input").bind('input', function() {
+    current_page = 1;
+    get_prints('');
+});
+
+$(document).ready(function(){get_prints('')});
+
 </script>
+
 {% endblock %}

@@ -24,6 +24,14 @@ def filter(request, page=1):
     return HttpResponse(json.dumps({'job': int(request.GET['job']), 'data': prints}))
 
 
+def name_index(request, page=1):
+    objects = OldPrint.objects.filter(author_khw__startswith=request.GET.get('letter', ''))
+    paginator = Paginator(objects.order_by('title'), settings.PRINTS_PER_PAGE)
+
+    prints = [old_print.smart_dict for old_print in paginator.page(page)]
+    return HttpResponse(json.dumps({'job': int(request.GET['job']), 'data': prints}))
+
+
 def collection(request):
     filter = PrintsFilter(request.GET)
     return render(request, "collection.html", {'default_title_page': settings.DEFAULT_TITLE_PAGE,
