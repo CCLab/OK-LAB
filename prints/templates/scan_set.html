@@ -9,14 +9,15 @@
 {% block content %}
 <div class="margin-t-small"></div>
 <div class="row margin-b-20">
-    <div class="col-md-9">
+    <div class="col-md-6">
         <h3 class="brown-text print-title">{{ print.title }}</h3>
     </div>
-    <div class="col-md-3">
-        {% if user.is_authenticated %}
-        <button onclick="removingMode()" class="brown-btn">Edytuj</button>
-        {% endif %}
+    {% if user.is_authenticated %}
+    <div class="col-md-6">
+        <button onclick="removingMode()" class="brown-btn">Dodaj</button>
+        <button onclick="removingMode()" class="brown-btn">Usuń zaznaczone</button>
     </div>
+    {% endif %}
 </div>
 <div class="row">
     <div class="col-xs-12 col-sm-4 col-md-3 col-lg-3 col-xl-2">
@@ -24,7 +25,9 @@
             <div class="thumbnail">
                 <img onclick="javascript:showGallery(0);" src="https://farm4.staticflickr.com/3894/15008518202_b016d7d289_m.jpg" alt="" />
             </div>
+            {% if user.is_authenticated %}
             <input type="checkbox" id="test1" />
+            {% endif %}
             <!--<label></label>-->
             <span>1</span>
         </div>
@@ -35,6 +38,7 @@
                 <img onclick="javascript:showGallery(1);" src="https://farm6.staticflickr.com/5591/15008867125_68a8ed88cc_m.jpg" alt="" />
             </div>
             <input type="checkbox" id="test1" />
+            <!--<label></label>-->
             <span>2</span>
         </div>
     </div>

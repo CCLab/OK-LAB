@@ -61,7 +61,10 @@ def upload_title_page(request, id):
         scan.save()
         old_print.title_page = scan
         old_print.save()
-        os.makedirs(old_print.path)
+        if not os.path.exists(old_print.path):
+            os.makedirs(old_print.path)
+        if os.path.exists(scan.path):
+            os.remove(scan.path)
         handle_uploaded_file(request.FILES['file'], scan.path)
-        return HttpResponse("OK")
+        return HttpResponse(str(scan.static))
     return HttpResponseBadRequest("ERROR")

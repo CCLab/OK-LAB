@@ -51,7 +51,11 @@ class OldPrint(models.Model):
 
     @property
     def path(self):
-        return os.path.join(settings.STATIC_ROOT, 'img', 'data', str(self.id))
+        if settings.DEBUG:
+            path = os.path.join(settings.BASE_DIR, 'prints', 'static')
+        else:
+            path = settings.STATIC_ROOT
+        return os.path.join(path, 'img', 'data', str(self.id))
 
     @property
     def static(self):
@@ -133,4 +137,10 @@ class Scan(models.Model):
     @property
     def path(self):
         return os.path.join(self.old_print.path, str(self.file_name))
+
+    @property
+    def thumbnail(self):
+        return ''
+
+
 
