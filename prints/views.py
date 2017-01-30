@@ -21,7 +21,7 @@ def filter(request, page=1):
     paginator = Paginator(filter.qs.order_by('title'), settings.PRINTS_PER_PAGE)
 
     prints = [old_print.smart_dict for old_print in paginator.page(page)]
-    return HttpResponse(json.dumps({'job': int(request.GET['job']), 'data': prints}))
+    return HttpResponse(json.dumps({'num_pages': paginator.num_pages, 'job': int(request.GET['job']), 'data': prints}))
 
 
 def name_index(request, page=1):
@@ -29,7 +29,7 @@ def name_index(request, page=1):
     paginator = Paginator(objects.order_by('title'), settings.PRINTS_PER_PAGE)
 
     prints = [old_print.smart_dict for old_print in paginator.page(page)]
-    return HttpResponse(json.dumps({'job': int(request.GET['job']), 'data': prints}))
+    return HttpResponse(json.dumps({'num_pages': paginator.num_pages, 'job': int(request.GET['job']), 'data': prints}))
 
 
 def collection(request):
@@ -38,13 +38,8 @@ def collection(request):
                                                'filter': filter})
 
 
-def by_name(request, letter=None):
-    paths = ["/img/data/Acta et literae_{}.jpg".format(i) for i in range(7)]
-    # if letter:
-    #     paths = [path for path in paths if random.choice([True, False])]
-    return render(request, "by_name.html",
-                  {'prints': {letter: [random.choice(paths)] * random.randint(2, 5) for letter in LETTERS},
-                   'letters': LETTERS})
+def by_name(request):
+    return render(request, "by_name.html", {'letters': LETTERS})
 
 
 def single(request, id):

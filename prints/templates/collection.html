@@ -16,8 +16,13 @@
     </div>
     <div class="col-md-9 col-sm-8 col-lg-10">
         <div class="row mix-container"></div>
+        <div class="row text-center">
+            <div class="pages" role="group">
+            </div>
+        </div>
     </div>
 </div>
+
 
 {% endblock %}
 
@@ -28,6 +33,7 @@
 
 var current_page = 1;
 var current_job = 0;
+var num_pages = 1;
 
 var mixer = mixitup('.mix-container', {
     controls: {
@@ -44,6 +50,29 @@ var mixer = mixitup('.mix-container', {
     }
 });
 
+function update_pages() {
+    text = '';
+    k = current_page - 2;
+    if (k<1) {k=1;};
+    if (current_page > 1) {
+        text = '<button onclick="javascript:previous_page()" class="btn brown-btn page-arrow"><<</button>';
+    }
+
+    for (;k <= current_page+2 && k <= num_pages; k++){
+        if (k == current_page){
+            text = text + '<button class="btn brown-btn page-number active">' + k + '</button>';
+        }
+        else {
+            text = text + '<button onclick="javascript:page('+k+')" class="btn brown-btn page-number">' + k + '</button>';
+        }
+    }
+
+    if (num_pages > current_page) {
+        text = text + '<button onclick="javascript:next_page()" class="btn brown-btn page-arrow">>></button>';
+    }
+    $('.pages').html(text);
+}
+
 function try_set(data) {
     if (data.job != current_job) return;
     if (mixer.isMixing()){
@@ -51,7 +80,9 @@ function try_set(data) {
         return;
     }
     if (data.job == current_job){
+        num_pages = data.num_pages;
         mixer.dataset(data.data);
+        update_pages();
     }
 }
 
@@ -59,7 +90,6 @@ function get_prints() {
     current_job = (current_job + 1) % 65535;
     $.get('/api/v1/prints/' + current_page.toString() + '/?' + $('#filter-form').serialize() + '&job=' + current_job.toString(), function(data) {
         try_set($.parseJSON(data));
-
     });
 }
 
@@ -83,6 +113,23 @@ $("#filter-form input").bind('input', function() {
 });
 
 $(document).ready(get_prints);
+
+function page(page){
+    if (page > 0 && page <= num_pages){
+        current_page = page;
+        update_pages();
+        get_prints();
+    }
+}
+
+function next_page(){
+    page(current_page+1);
+};
+
+function previous_page(){
+    page(current_page-1);
+};
+
 
 
 </script>

@@ -430,6 +430,15 @@ p { line-height: 1.9; }
 
 
 
+.pages button {
+    margin-left: 1px;
+    margin-right: 1px;
+    padding: 10px;;
+}
+.page-number.active {
+    background-color: #191919;
+}
+
 
 
 

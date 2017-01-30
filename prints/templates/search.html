@@ -6,8 +6,8 @@
 <div class="row search-section">
     <!--<div class="col-lg-2 col-md-1"></div>-->
     <div class="col">
-        <form action="/" method="post" class="search">
-                <input type="text" id="search" name="search" placeholder="Szukaj"/>
+        <form action="{% url "prints:collection" %}" method="get" class="search">
+                <input type="text" id="search" name="title__contains" placeholder="Szukaj"/>
                 <button type="submit">Szukaj</button>
         </form>
     </div>
