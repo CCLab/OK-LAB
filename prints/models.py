@@ -47,7 +47,7 @@ class OldPrint(models.Model):
     laws = models.CharField(max_length=16, blank=True, verbose_name='prawa')
     # ???
     daten_from = models.DateField(null=True, blank=True, verbose_name='datan od')
-    daten_to = models.DateField(null=True, blank=True, verbose_name='datan_do')
+    daten_to = models.DateField(null=True, blank=True, verbose_name='datan do')
 
     @property
     def path(self):

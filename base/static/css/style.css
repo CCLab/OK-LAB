@@ -490,7 +490,8 @@ form.old-print-edit p {
 
 form,
 form input,
-form textarea {
+form textarea,
+form select {
     border-radius: 0;
     font-size: 1.1rem;
     padding: 0.75rem 1rem;
@@ -501,7 +502,7 @@ form textarea {
 
 }
 
-form input:focus, form textarea:focus { border-color: #906030; }
+form input:focus, form textarea:focus, form select:focus { border-color: #906030; }
 
 
 form .errorlist li {
@@ -519,10 +520,16 @@ form label {
 
 
 form textarea,
-form input {
+form input,
+form select {
   width: 60%;
   min-width: 200px;
   border: 1px solid #ccc;
+}
+
+form select {
+    width: 19.65%;
+    min-width: 50px;
 }
 
 .input-group-btn {

@@ -9,7 +9,7 @@
             <h2 class="brown-text t-title">{{ title }}</h2>
             {% csrf_token %}
 
-            {{form.as_p}}
+            {{ form.as_p }}
 
             <button type="submit">Zapisz</button>
         </form>

@@ -1,11 +1,15 @@
 #!/usr/bin/python
 # coding: utf-8
-from django.forms import ModelForm
+from datetime import datetime
+
+from django.forms import ModelForm, DateInput, SelectDateWidget
 
 from prints.models import OldPrint
 
 
 class OldPrintForm(ModelForm):
+
+
     class Meta:
         model = OldPrint
         fields = [
@@ -40,3 +44,9 @@ class OldPrintForm(ModelForm):
             "daten_from",
             "daten_to",
         ]
+        widgets = {
+            'publication_date': SelectDateWidget(years=range(2100, 1500, -1)),
+            'printing_date': SelectDateWidget(years=range(2100, 1500, -1)),
+            'daten_from': SelectDateWidget(years=range(2100, 1500, -1)),
+            'daten_to': SelectDateWidget(years=range(2100, 1500, -1)),
+        }
